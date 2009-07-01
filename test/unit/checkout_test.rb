@@ -56,6 +56,11 @@ class CheckoutTest < ActiveSupport::TestCase
     setup do 
       @checkout = Checkout.new(:order => Order.create, :ship_address => Factory(:address), :bill_address => Factory(:address))
     end
+    context "and having a discount code" do
+      should_eventually "create a credit"
+      should_eventually "create a credit for the proper amount"
+      should_eventually "ignore discount codes that do not apply"
+    end
     context "with no shipping method" do
       setup { @checkout.save }
       should_not_change "@checkout.order.shipping_charges"
@@ -105,6 +110,26 @@ class CheckoutTest < ActiveSupport::TestCase
         should_change "@checkout.order.tax_charges.first.amount", :from => 15, :to => 8
       end
     end 
+  end
+  
+  context "save with existing credits" do
+    setup do
+      @checkout = Checkout.create(:order => Order.create(:credits => [Factory(:discount_credit)]))
+      @checkout.save
+    end
+    should "clear existing dicounts" do
+      assert_equal(0, @checkout.order.credits.count)
+    end
+  end
+
+  context "save with existing credits and completed checkout" do
+    setup do
+      @checkout = Checkout.create(:order => Order.create(:credits => [Factory(:discount_credit)]), :completed_at => Time.now)
+      @checkout.save
+    end
+    should "not clear existing discounts" do
+      assert_equal(1, @checkout.order.credits.count)
+    end
   end
 
 end

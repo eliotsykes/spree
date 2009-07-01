@@ -1,0 +1,2 @@
+class DiscountCredit < Credit
+end
