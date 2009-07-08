@@ -1,2 +1,0 @@
-class DiscountCredit < Credit
-end

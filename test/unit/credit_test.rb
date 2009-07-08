@@ -5,12 +5,12 @@ class CreditTest < ActiveSupport::TestCase
   should_validate_presence_of :description
   context "order instance with discounts" do
     setup do
-      @credit = Factory(:discount_credit, :amount => 2.00)
+      @credit = Factory(:credit, :amount => 2.00)
       @order = Factory(:order, :credits => [@credit])
     end
     context "when adding another discount" do
       setup do 
-        @order.credits << Factory(:discount_credit, :amount => 1.00)
+        @order.credits << Factory(:credit, :amount => 1.00)
         @order.save
       end
       
