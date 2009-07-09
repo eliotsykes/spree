@@ -132,3 +132,8 @@ Factory.define :credit do |f|
   f.amount 2.00
   f.description "20% Off"
 end
+
+Factory.define :coupon do |f|
+  f.code "FOO"
+  f.calculator "TestCalc"
+end

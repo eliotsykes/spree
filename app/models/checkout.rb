@@ -8,6 +8,8 @@ class Checkout < ActiveRecord::Base
   belongs_to :shipping_method
   belongs_to :bill_address, :foreign_key => "bill_address_id", :class_name => "Address"
   belongs_to :ship_address, :foreign_key => "ship_address_id", :class_name => "Address"
+  has_many :discounts
+
   accepts_nested_attributes_for :ship_address, :bill_address
 
   # for memory-only storage of creditcard details
