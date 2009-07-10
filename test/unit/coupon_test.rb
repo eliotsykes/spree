@@ -11,9 +11,16 @@ class CouponTest < ActiveSupport::TestCase
     end
     context "create_discount" do
       setup do
-        @coupon.create_discount(@checkout)
+        @discount = @coupon.create_discount(@checkout)
       end 
       should_change "@checkout.discounts.count", :by => 1
+      should "create a discount with an amount determined by the calculator" do
+        assert_equal BigDecimal.new("0.99"), @discount.amount
+      end
+      should_change "@checkout.order.credits.count", :by => 1
+      should "create a credit with the amount determined by the calculator" do
+        assert_equal BigDecimal.new("0.99"), @discount.credit.amount
+      end
     end    
     context "when expired" do
       setup do 

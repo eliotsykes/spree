@@ -13,7 +13,12 @@ class Checkout < ActiveRecord::Base
   accepts_nested_attributes_for :ship_address, :bill_address
 
   # for memory-only storage of creditcard details
-  attr_accessor :creditcard
+  attr_accessor :creditcard    
+  
+  def coupon_code=(code)
+    return unless coupon = Coupon.find_by_code(code)
+    coupon.create_discount(self)
+  end
 
   private
   def authorize_creditcard
