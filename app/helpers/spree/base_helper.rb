@@ -108,5 +108,25 @@ module Spree::BaseHelper
       end
     end
   end
+
+  def stylesheet_tags(paths=stylesheet_paths)
+    if !paths.blank?
+      paths.each do |path|
+        stylesheet_link_tag path
+      end
+    end
+  end
   
+  def stylesheet_paths
+    paths = Spree::Config[:stylesheets]
+    if (paths.blank?)
+      []
+    else
+      paths.split(',')
+    end
+  end
+
+  def logo(image_path=Spree::Config[:logo])
+    link_to image_tag(image_path), root_path
+  end
 end

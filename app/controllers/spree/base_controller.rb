@@ -1,6 +1,8 @@
 class Spree::BaseController < ApplicationController
 
+  attr_writer :title
   filter_parameter_logging :password, :number, :verification_value
+  helper_method :title, :title=
 
   # retrieve the order_id from the session and then load from the database (or return a new order if no 
   # such id exists in the session)
@@ -23,6 +25,21 @@ class Spree::BaseController < ApplicationController
   # of a view. Ex. Extra user form fields
   def initialize_extension_partials
     @extension_partials = []
+  end
+
+  # Override this or use title= if you need custom titles. title=
+  # can be used in views as well as controllers.
+  # e.g. <% title = 'This is a custom title for this view' %>
+  def title
+    if @title.blank?
+      default_title
+    else
+      @title
+    end
+  end
+  
+  def default_title
+    Spree::Config[:site_name]
   end
   
 end
