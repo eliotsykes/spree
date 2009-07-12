@@ -1,8 +1,7 @@
 class Spree::BaseController < ApplicationController
 
-  attr_writer :title
   filter_parameter_logging :password, :number, :verification_value
-  helper_method :title, :title=
+  helper_method :title, :set_title
 
   # retrieve the order_id from the session and then load from the database (or return a new order if no 
   # such id exists in the session)
@@ -27,9 +26,12 @@ class Spree::BaseController < ApplicationController
     @extension_partials = []
   end
 
-  # Override this or use title= if you need custom titles. title=
-  # can be used in views as well as controllers.
-  # e.g. <% title = 'This is a custom title for this view' %>
+  # set_title can be used in views as well as controllers.
+  # e.g. <% set_title 'This is a custom title for this view' %>
+  def set_title(title)
+    @title = title
+  end
+  
   def title
     if @title.blank?
       default_title
