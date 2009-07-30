@@ -62,6 +62,20 @@ Factory.define :address do |f|
   f.association :country
 end
 
+Factory.define :metadata do |f|
+  f.description 'Description'
+  f.keywords 'keyword1, keyword2'
+end
+
+Factory.define :taxonomy do |f|
+  f.name 'Brand'
+end
+
+Factory.define :taxon do |f|
+  f.name 'Brands'
+  f.permalink 'brands/'
+end
+
 Factory.define :product do |f|
   f.name "Foo Product"
   f.master_price 19.99

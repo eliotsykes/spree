@@ -97,26 +97,39 @@ module Spree::BaseHelper
     end
   end
   
+  # TODO correct spelling to metadata_tags. Metadata is one word.
   def meta_data_tags
     return unless self.respond_to?(:object) && object
-    "".tap do |tags|
-      if object.respond_to?(:meta_keywords) and object.meta_keywords.present?
-        tags << tag('meta', :name => 'keywords', :content => object.meta_keywords) + "\n"
+    tags = ''
+    # The old way of getting metadata, only works for products, will be removed shortly.
+    if object.respond_to?(:meta_keywords) && object.meta_keywords.present?
+      tags << tag('meta', :name => 'keywords', :content => object.meta_keywords) + "\n"
+    end
+    if object.respond_to?(:meta_description) && object.meta_description.present?
+      tags << tag('meta', :name => 'description', :content => object.meta_description) + "\n"
+    end
+    # The new way of getting metadata
+    if object.respond_to?(:metadata) && object.metadata.present?
+      keywords = object.metadata.keywords
+      description = object.metadata.description
+      if (!keywords.blank?)
+        tags << tag('meta', :name => 'keywords', :content => keywords) + "\n"
       end
-      if object.respond_to?(:meta_description) and object.meta_description.present?
-        tags << tag('meta', :name => 'description', :content => object.meta_description) + "\n"
+      if (!description.blank?)
+        tags << tag('meta', :name => 'description', :content => description) + "\n"  
       end
     end
+    return tags
   end
 
   def stylesheet_tags(paths=stylesheet_paths)
-    output = ''
+    tags = ''
     if !paths.blank?
       paths.each do |path|
-        output << stylesheet_link_tag(path)
+        tags << stylesheet_link_tag(path) + "\n"
       end
     end
-    return output
+    return tags
   end
   
   def stylesheet_paths

@@ -7,6 +7,10 @@ module TaxonHelper
       :position => 1
     }
   end
+  
+  def create_foo_taxon
+    Taxon.create(:name => "foo", :taxonomy => @taxonomy)
+  end
 end
 
 describe Taxon do
@@ -37,14 +41,21 @@ describe Taxon do
   end
   
   it "should set the permalink on create" do
-    @taxon = Taxon.create(:name => "foo", :taxonomy => @taxonomy)
+    @taxon = create_foo_taxon
     @taxon.permalink.should == "foo/"
   end
   
   it "should update the permalink on update" do
-    @taxon = Taxon.create(:name => "foo", :taxonomy => @taxonomy)
+    @taxon = create_foo_taxon
     @taxon.update_attribute("name", "fooz")
     @taxon.permalink.should == "fooz/"
+  end
+  
+  it "should have nil metadata on create unless metadata is given" do
+    @taxon = create_foo_taxon
+    @taxon.metadata.should be_nil
+    @taxon = Taxon.create(:name => "fooz", :taxonomy => @taxonomy, :metadata => Metadata.new)
+    @taxon.metadata.new_record?.should be_false
   end
   
 end
