@@ -51,11 +51,4 @@ describe Taxon do
     @taxon.permalink.should == "fooz/"
   end
   
-  it "should have nil metadata on create unless metadata is given" do
-    @taxon = create_foo_taxon
-    @taxon.metadata.should be_nil
-    @taxon = Taxon.create(:name => "fooz", :taxonomy => @taxonomy, :metadata => Metadata.new)
-    @taxon.metadata.new_record?.should be_false
-  end
-  
 end
