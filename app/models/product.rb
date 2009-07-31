@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :master_price
 
-  accepts_nested_attributes_for :product_properties
+  accepts_nested_attributes_for :product_properties, :metadata
   
   make_permalink
 

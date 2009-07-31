@@ -1,0 +1,12 @@
+<h2><%= t("metadata") %></h2>
+<% f.object.build_metadata if f.object.metadata.nil? %>
+<% f.fields_for :metadata do |metadata_fields| %>
+<p>
+  <%= metadata_fields.label :keywords, t("meta_keywords") %><br />
+  <%= metadata_fields.text_field :keywords, :class => 'fullwidth' %>
+</p>
+<p>
+  <%= metadata_fields.label :description, t("meta_description") %><br />
+  <%= metadata_fields.text_field :description, :class => 'fullwidth' %>
+</p>
+<% end %>

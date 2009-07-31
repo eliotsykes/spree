@@ -58,15 +58,7 @@
   </div>
 </div>
 
-<h2><%= t("metadata") %></h2>
-<p>
-  <%= f.label :meta_keywords, t("meta_keywords")%><br />
-  <%= f.text_field :meta_keywords, :class => 'fullwidth' %>        
-</p>
-<p>
-  <%= f.label :meta_description, t("meta_description")%><br />
-  <%= f.text_field :meta_description, :class => 'fullwidth' %>        
-</p>
+<%= render 'admin/shared/metadata_form', :f => f %>
 
 <%#= render 'properties_form', :f => f %>
 
