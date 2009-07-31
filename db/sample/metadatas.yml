@@ -1,0 +1,19 @@
+ror_tote:
+  description: Lorem ipsum dolor sit amet
+  keywords: ruby on rails, tote 
+  metadatable: ror_tote (Product)
+
+ror_bag:
+  description: Lorem ipsum dolor sit amet
+  keywords: ruby on rails, bag 
+  metadatable: ror_bag (Product)
+  
+ror_baseball_jersey:
+  description: Lorem ipsum dolor sit amet
+  keywords: ruby on rails, baseball, jersey 
+  metadatable: ror_baseball_jersey (Product)
+
+rails:
+  description: Rails gifts for all the family
+  keywords: rails, ruby on rails
+  metadatable: rails (Taxon)
