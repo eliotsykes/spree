@@ -11,8 +11,8 @@ class Product < ActiveRecord::Base
 	
   belongs_to :tax_category
   has_and_belongs_to_many :taxons
+  has_one :metadata, :as => :metadatable, :dependent => :destroy
   belongs_to :shipping_category
-  
 
   validates_presence_of :name
   validates_presence_of :master_price
