@@ -2,13 +2,14 @@ class ProductsController < Spree::BaseController
   before_filter(:setup_admin_user) unless RAILS_ENV == "test"
 
   resource_controller
-  helper :taxons  
+  helper :taxons
   before_filter :load_data, :only => :show
   actions :show, :index
 
   index do
     before do
       @product_cols = 3
+      load_metadata
     end
   end
 
@@ -18,7 +19,15 @@ class ProductsController < Spree::BaseController
     render :partial => 'image', :locals => {:image => img}
   end
 
+  def home?
+    '/' == request.path
+  end
+  
   private
+  def load_metadata
+    self.metadata = Metadata.for_home if home?
+  end
+  
   def setup_admin_user
     return if admin_created?
     flash[:notice] = I18n.t(:please_create_user)
@@ -26,11 +35,10 @@ class ProductsController < Spree::BaseController
   end
   
   def load_data  
-	    load_object  
+	  load_object  
 		@selected_variant = @product.variants.detect { |v| v.in_stock || Spree::Config[:allow_backorders] }
-		
     return unless permalink = params[:taxon_path]
-    @taxon = Taxon.find_by_permalink(params[:taxon_path].join("/") + "/")	 
+    @taxon = Taxon.find_by_permalink(params[:taxon_path].join("/") + "/")	
   end
   
   def collection

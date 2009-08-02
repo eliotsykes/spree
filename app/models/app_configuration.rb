@@ -5,6 +5,8 @@ class AppConfiguration < Configuration
 
   preference :site_name, :string, :default => 'Spree Demo Site'
   preference :site_url, :string, :default => 'demo.spreecommerce.com'
+  preference :home_metadata_description, :string, :default => nil
+  preference :home_metadata_keywords, :string, :default => nil
   preference :enable_mail_delivery, :boolean, :default => false
   preference :mail_host, :string, :default => 'localhost'
   preference :mail_domain, :string, :default => 'localhost'

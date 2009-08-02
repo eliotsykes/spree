@@ -12,7 +12,6 @@ module Spree::BaseHelper
     cart_link
   end
   
-  
   def link_to_cart(text=t('cart'))
     path = cart_path
     order = Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank?
@@ -65,7 +64,6 @@ module Spree::BaseHelper
     utc_to_local(Time.now.utc.yesterday).to_ordinalized_s(:stub)
   end  
   
-
   # human readable list of variant options
   def variant_options(v, allow_back_orders = Spree::Config[:allow_backorders], include_style = true)
     list = v.options_text
@@ -98,11 +96,14 @@ module Spree::BaseHelper
   end
   
   def metadata_tags
-    return unless self.respond_to?(:object) && object
-    tags = ''
-    if object.respond_to?(:metadata) && object.metadata.present?
-      keywords = object.metadata.keywords
-      description = object.metadata.description
+    # Keep the use of self here, noticed some weird behaviour without it.
+    if self.metadata.nil? && resource_has_metadata?
+      self.metadata = self.object.metadata 
+    end
+    if !self.metadata.blank?
+      tags = ''
+      keywords = self.metadata.keywords
+      description = self.metadata.description
       if (!keywords.blank?)
         tags << tag('meta', :name => 'keywords', :content => keywords) + "\n"
       end
@@ -135,4 +136,15 @@ module Spree::BaseHelper
   def logo(image_path=Spree::Config[:logo])
     link_to image_tag(image_path), root_path
   end
+  
+  private
+
+  def resource_has_metadata?
+    resource_request? && self.object.respond_to?(:metadata) && !self.object.metadata.blank?
+  end
+  
+  def resource_request?
+    self.respond_to?(:object) && self.object
+  end
+
 end

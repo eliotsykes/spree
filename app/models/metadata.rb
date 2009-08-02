@@ -13,4 +13,10 @@ class Metadata < ActiveRecord::Base
     return keywords.blank? && description.blank?
   end
   
+  # Returns a transient instance containing the metadata for the home page
+  def self.for_home
+    Metadata.new(:description => Spree::Config[:home_metadata_description],
+      :keywords => Spree::Config[:home_metadata_keywords]).freeze
+  end
+  
 end

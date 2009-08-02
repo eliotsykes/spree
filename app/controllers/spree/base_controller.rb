@@ -1,5 +1,7 @@
 class Spree::BaseController < ApplicationController
 
+  helper_attr :metadata
+  attr_accessor :metadata
   filter_parameter_logging :password, :number, :verification_value
   helper_method :title, :set_title
 
