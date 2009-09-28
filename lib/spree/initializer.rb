@@ -5,6 +5,7 @@
 
 require 'initializer'
 require 'spree/extension_loader'
+require 'spree/extensions'
 
 # Small hack to make sure metal stuff inside Spree gem is also loaded
 Rails::Initializer.class_eval do
@@ -25,10 +26,10 @@ module Spree
     def initialize   
       self.view_paths = []
       self.extension_paths = default_extension_paths
-      self.extensions = [ :all ]
+      self.extensions = Spree::Extensions.load_order
       super
     end
-
+    
     def default_extension_paths
       env = ENV["RAILS_ENV"] || RAILS_ENV
       paths = [SPREE_ROOT + '/vendor/extensions', RAILS_ROOT + '/vendor/extensions'].uniq
