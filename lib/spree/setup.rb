@@ -74,29 +74,38 @@ module Spree
     # Uses a special set of fixtures to load sample data
     def load_sample_data
       # load initial database fixtures (in db/sample/*.yml) into the current environment's database
+      # Extensions load sample fixtures in their own rake db:bootstrap task, 
+      # e.g. see vendor/extensions/site/lib/tasks/site_extension_tasks.rake 
       ActiveRecord::Base.establish_connection(RAILS_ENV.to_sym)
       Dir.glob(File.join(SPREE_ROOT, "db", 'sample', '*.{yml,csv}')).each do |fixture_file|
         Fixtures.create_fixtures("#{SPREE_ROOT}/db/sample", File.basename(fixture_file, '.*'))
       end
 
+      # Sample assets can be copied from Spree root and extensions.
+      sample_data_roots = [SPREE_ROOT] + Spree::ExtensionLoader.instance.load_extension_roots
+      
       # make product images available to the app
       target = "#{RAILS_ROOT}/public/assets/products/"
-      source = "#{SPREE_ROOT}/lib/tasks/sample/products/"
-
-      Find.find(source) do |f|
-        # omit hidden directories (SVN, etc.)
-        if File.basename(f) =~ /^[.]/
-          Find.prune 
-          next
-        end
-
-        src_path = source + f.sub(source, '')
-        target_path = target + f.sub(source, '')
-
-        if File.directory?(f)
-          FileUtils.mkdir_p target_path
-        else
-          FileUtils.cp src_path, target_path
+      
+      sample_data_roots.each do |sample_data_root|
+        source = "#{sample_data_root}/lib/tasks/sample/products/"
+        if File.exists?(source)
+          Find.find(source) do |f|
+            # omit hidden directories (SVN, etc.)
+            if File.basename(f) =~ /^[.]/
+              Find.prune 
+              next
+            end
+    
+            src_path = source + f.sub(source, '')
+            target_path = target + f.sub(source, '')
+    
+            if File.directory?(f)
+              FileUtils.mkdir_p target_path
+            else
+              FileUtils.cp src_path, target_path
+            end
+          end
         end
       end
       
