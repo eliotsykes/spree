@@ -1,5 +1,5 @@
 class Spree::BaseController < ActionController::Base
-  layout 'application'
+  layout 'spree_application'
   helper :application
   before_filter :instantiate_controller_and_action_names
   filter_parameter_logging :password, :password_confirmation, :number, :verification_value
@@ -71,7 +71,7 @@ class Spree::BaseController < ActionController::Base
       if self.respond_to? :object_missing
         self.object_missing(params[:id])
       else 
-        render_404 Exception.new("missing object in #{self.class.to_s}")
+        render_404(Exception.new("missing object in #{self.class.to_s}"))
       end
     end
     return true 
