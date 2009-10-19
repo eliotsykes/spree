@@ -28,12 +28,12 @@ class Creditcard < ActiveRecord::Base
     def month_days
       mdays = [nil,31,28,31,30,31,30,31,31,30,31,30,31]
       mdays[2] = 29 if Date.leap?(year)
-      mdays[month]
+      mdays[month.to_i]
     end
   end
   
   def expiry_date
-    ExpiryDate.new(Time.now.month, Time.now.year)
+    ExpiryDate.new(self.month, self.year)
   end
 
   def expired?
@@ -45,15 +45,15 @@ class Creditcard < ActiveRecord::Base
   end
   
   def first_name?
-    !@first_name.blank?
+    !self.first_name.blank?
   end
   
   def last_name?
-    !@last_name.blank?
+    !self.last_name.blank?
   end
         
   def name
-    "#{@first_name} #{@last_name}"
+    "#{self.first_name} #{self.last_name}"
   end
         
   def verification_value?

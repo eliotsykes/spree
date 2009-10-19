@@ -385,7 +385,7 @@ en-US:
   new_variant: "New Variant"
   new_zone: "New Zone"
   next: Next
-  no: "No"
+  'no': "No"
   no_items_in_cart: ""
   no_match_found: "No Match Found"
   no_user_found: "No user was found with that email address"
@@ -478,6 +478,7 @@ en-US:
   sales_totals_description: "Sales Total For All Orders"
   save_preferences: Save Preferences
   search: Search
+  search_results: "Search results for '{{keywords}}'"
   secure_connection_type: Secure Connection Type
   select: Select
   select_from_prototype: "Select From Prototype"
@@ -606,11 +607,18 @@ en-US:
   whats_this: "What's this"
   width: Width
   year: "Year"
-  yes: "Yes"
+  'yes': "Yes"
   you_have_been_logged_out: "You have been logged out."
   your_cart_is_empty: "Your cart is empty"
   zip: Zip
   zone: Zone
   zone_based: "Zone Based"
   zone_setting_description: "Collections of countries, states or other zones to be used in various calculations."
-  zones: Zones
+  zones: Zones                             
+  new_billing_integration: New Billing Integration
+  billing_integrations: Billing Integrations
+  billing_integration: Billing Integration
+  billing_integrations_description: "Configure your settings for third party billing integrations such as Paypal, Google Checkout, etc."
+  new_billing_integration: New Billing Integration
+  editing_billing_integration: Editing Billing Integration
+  integration_settings_warning: "If you are changing the billing integration, you must save first before you can edit the integration settings"
