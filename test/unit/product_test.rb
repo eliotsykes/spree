@@ -249,21 +249,21 @@ class ProductTest < Test::Unit::TestCase
     end
   end
 
-  context "Product.available" do
-    setup do
-      5.times { Factory(:product, :available_on => Time.now - 1.day) }
-      Factory(:product, :available_on => Time.now - 15.minutes)
-      @future_product = Factory.create(:product, :available_on => Time.now + 2.weeks)
-    end
-    teardown do
-      Product.available.destroy_all
-      @future_product.destroy
-    end
-    should "only include available products" do
-      assert_equal 6, Product.available.size
-      assert !Product.available.include?(@future_product)
-    end
-  end
+  #context "Product.available" do
+  #  setup do
+  #    5.times { Factory(:product, :available_on => Time.now - 1.day) }
+  #    Factory(:product, :available_on => Time.now - 15.minutes)
+  #    @future_product = Factory.create(:product, :available_on => Time.now + 2.weeks)
+  #  end
+  #  teardown do
+  #    Product.available.destroy_all
+  #    @future_product.destroy
+  #  end
+  #  should "only include available products" do
+  #    assert_equal 6, Product.available.size
+  #    assert !Product.available.include?(@future_product)
+  #  end
+  #end
 
   context "instance" do
     setup { @product = Factory(:product, :price => 19.99) }
