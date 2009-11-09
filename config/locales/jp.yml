@@ -1,5 +1,7 @@
 ---
 jp: 
+  'no': "No"
+  'yes': "Yes"
   a_copy_of_all_mail_will_be_sent_to_the_following_addresses: A copy of all mail be sent to the following addresses
   abbreviation: 略語
   access_denied: "Access Denied"
@@ -197,6 +199,9 @@ jp:
   backordering_is_allowed: "Backordering {{not}} allowed"
   bill_address: 請求先住所
   billing_address: 請求先住所
+  billing_integration: Billing Integration
+  billing_integrations: Billing Integrations
+  billing_integrations_description: "Configure your settings for third party billing integrations such as Paypal, Google Checkout, etc."
   calculator: Calculator
   calculator_settings_warning: "If you are changing the calculator type, you must save first before you can edit the calculator settings"
   cancel: キャンセル
@@ -214,6 +219,7 @@ jp:
   charged: 課金
   checkout: 精算
   city: 都市名
+  clone: Clone
   code: Code
   combine: Combine
   comp_order: "Comp Order"
@@ -253,6 +259,7 @@ jp:
   destroy: 破壊する
   display: 表示
   edit: 編集
+  editing_billing_integration: Editing Billing Integration
   editing_category: カテゴリーの編集
   editing_coupon: Editing Coupon
   editing_option_type: "Editing Option Type"
@@ -272,6 +279,8 @@ jp:
   email_address: Eメールアドレス
   email_server_settings_description: メールサーバの設定をします。
   empty_cart: カートを空にする
+  enable_login_via_login_password: "Use standard email/password"  
+  enable_login_via_openid: "Use OpenID instead"
   enable_mail_delivery: Enable Mail Delivery
   enable_mail_queue: "Enable Mail Queue"
   enter_exactly_as_shown_on_card: Please enter exactly as shown on the card
@@ -317,6 +326,7 @@ jp:
   images: 画像
   images_for: "Images for"
   in_progress: "In Progress"
+  integration_settings_warning: "If you are changing the billing integration, you must save first before you can edit the integration settings"
   invalid_search: "Invalid search criteria."
   inventory: 在庫
   inventory_adjustment: 在庫調整
@@ -344,6 +354,7 @@ jp:
   login_failed: "Login authentication failed."
   login_name: ログイン
   logout: ログアウト
+  look_for_similar_items: Look for similar items
   maestro_or_solo_cards: Maestro/Solo cards
   mail_delivery_enabled: "Mail delivery is enabled"
   mail_delivery_not_enabled: "Mail delivery is not enabled"
@@ -357,11 +368,13 @@ jp:
   meta_description: メタ情報説明
   meta_keywords: メタキーワード
   metadata: メタデータ
+  missing_required_information: "Missing Required Information"
   month: "Month"
   my_account: アカウント情報
   my_orders: 注文情報
   name: 名称
   new: 新規
+  new_billing_integration: New Billing Integration
   new_category: 新規カテゴリー
   new_coupon: New Coupon
   new_credit_card_payment: 新規カード払い
@@ -370,6 +383,7 @@ jp:
   new_option_type: 新規オプションタイプ
   new_option_value: 新規オプション値
   new_product: 新規商品
+  new_product_group: New Product Group
   new_property: 新規属性
   new_prototype: 新規プロトタイプ
   new_shipment: 新規配送
@@ -385,7 +399,6 @@ jp:
   new_variant: 新規形式
   new_zone: 新規ゾーン
   next: 次へ
-  no: "No"
   no_items_in_cart: ""
   no_match_found: "No Match Found"
   no_user_found: "No user was found with that email address"
@@ -436,6 +449,7 @@ jp:
   please_create_user: "Please create a user account"     
   powered_by: "Powered by"
   presentation: 表示名
+  preview: Preview
   previous: 前へ
   price: 価格
   price_with_vat_included: "{{price}} (inc. VAT)"
@@ -446,8 +460,121 @@ jp:
   process: Process
   product: 商品
   product_details: 商品詳細
+  product_group: Product Group
+  product_group_invalid: Product Group has invalid scopes
+  product_groups: Product Groups
   product_has_no_description: Product has not description
   product_properties: 商品情報
+  product_scopes:
+    groups:
+      price:
+        description: "Scopes for selecting products based on Price"
+        name: Price
+      search:
+        description: "Scopes for selecting products based on name, keywords and description of product"
+        name: "Text search"
+      taxon:
+        description: "Scopes for selecting products based on Taxons"
+        name: Taxon
+      values:
+        description: "Scopes for selecting products based on option and property values"
+        name: Values
+    scopes:
+      ascend_by_master_price:
+        name: Ascend by product master price
+      ascend_by_name:
+        name: Ascend by product name
+      ascend_by_updated_at:
+        name: Ascendy by actualization date
+      by_popularity:
+        name: Sort by popularity(most popular first)
+      descend_by_master_price:
+        name: Descend by product master price
+      descend_by_name:
+        name: Descend by product name
+      descend_by_updated_at:
+        name: Descend by actualization date
+      in_name:
+        args:
+          words: Words
+        description: "(separated by space or comma)"
+        name: "Product name have following"
+        sentence: product name contain <em>%s</em>
+      in_name_or_description:
+        args:
+          words: Words
+        description: "(separated by space or comma)"
+        name: "Product name or description have following"
+        sentence: name or description contain <em>%s</em>
+      in_name_or_keywords:
+        args:
+          words: Words
+        description: "(separated by space or comma)"
+        name: "Product name or meta heywords have following"
+        sentence: name or keywords contain <em>%s</em>
+      in_taxons:
+        args:
+          "taxon_names": "Taxon names"
+        description: "Taxon names have to be separated by comma or space(eg. adidas,shoes)"
+        name: "In taxons and all their descendants"
+        sentence: in <em>%s</em> and all their descendants
+      master_price_gte:
+        args:
+          amount: Amount
+        description: ""
+        name: "Master price greater or equal to"
+        sentence: price greater or equal to <em>%.2f</em>
+      master_price_lte:
+        args:
+          amount: Amount
+        description: ""
+        name: "Master price lesser or equal to"
+        sentence: price less or equal to <em>%.2f</em>
+      price_between:
+        args:
+          high: High
+          low: Low
+        description: ""
+        name: "Price between"
+        sentence: price between <em>%.2f</em> and <em>%.2f</em>
+      taxons_name_eq:
+        args:
+          taxon_name: "Taxon name"
+        description: "In specific taxon - without descendants"
+        name: "In Taxon(without descendants)"
+        sentence: in <em>%s</em>
+      with:
+        args:
+          value: Value
+        description: "Selects all products that have at least one variant that have specified value as either option or property (eg. red)"
+        name: With value
+        sentence: with value <em>%s</em>
+      with_option:
+        args:
+          option: Option
+        description: "Selects all products that have specified option(eg. color)"
+        name: "With option"
+        sentence: with option <em>%s</em>
+      with_option_value:
+        args:
+          option: Option
+          value: Value
+        description: "Selects all products that have at least one variant with specified option and value(eg. color:red)"
+        name: "With option and value"
+        sentence: with option <em>%s</em> and value <em>%s</em>
+      with_property:
+        args:
+          property: Property
+        description: "Selects all products that have specified property(eg. weight)"
+        name: "With property"
+        sentence: with property <em>%s</em>
+      with_property_value:
+        args:
+          property: Property
+          value: Value
+        description: "Selects all products that have at least one variant with specified property and value(eg. weight:10kg)"
+        name: "With property value"
+        sentence: with property <em>%s</em> and value <em>%s</em>
   products: 商品
   products_with_zero_inventory_display: "Products with a zero inventory will {{not}} be displayed"
   properties: 属性
@@ -465,6 +592,11 @@ jp:
   required_for_solo_and_maestro: Required for Solo and Maestro cards.
   resend: 再送
   reset_password: "Reset my password"
+  resource_controller:
+    member_object_not_found: "Member object not found."
+    successfully_created: "Successfully created!"
+    successfully_removed: "Successfully removed!"
+    successfully_updated: "Successfully updated!"
   response_code: "Response Code"
   resume: "resume"
   resumed: Resumed
@@ -478,6 +610,7 @@ jp:
   sales_totals_description: 全ての注文の売上げ合計
   save_preferences: Save Preferences
   search: 検索
+  search_results: "Search results for '{{keywords}}'"
   secure_connection_type: Secure Connection Type
   select: 選択
   select_from_prototype: "Select From Prototype"
@@ -509,6 +642,7 @@ jp:
   shipping_total: 配送料合計
   shop_by_taxonomy: "{{taxonomy}}"
   shopping_cart: ショッピングカート
+  show: Show
   show_deleted: 削除済みも表示
   show_incomplete_orders: 未処理の注文も表示
   show_only_complete_orders: 処理済みの注文のみを表示
@@ -592,6 +726,7 @@ jp:
   use_different_shipping_address: "Use Different Shipping Address"
   user: ユーザ
   user_account: ユーザアカウント
+  user_created_successfully: "User created successfully"
   user_details: ユーザ詳細
   users: ユーザ
   value: 値
@@ -606,7 +741,6 @@ jp:
   whats_this: "What's this"
   width: 横幅
   year: "Year"
-  yes: "Yes"
   you_have_been_logged_out: "You have been logged out."
   your_cart_is_empty: カートは空です
   zip: 郵便番号

@@ -1,5 +1,7 @@
 --- 
 nl-BE: 
+  'no': "No"
+  'yes': "Yes"
   a_copy_of_all_mail_will_be_sent_to_the_following_addresses: "Een kopie van alle mail wordt verzonden naar de volgende adressen"
   abbreviation: Afkorting
   access_denied: "Toegang geweigerd"
@@ -197,6 +199,9 @@ nl-BE:
   backordering_is_allowed: "Backordering {{not}} allowed"
   bill_address: "Factuuradres"
   billing_address: "Factuuradres"
+  billing_integration: Billing Integration
+  billing_integrations: Billing Integrations
+  billing_integrations_description: "Configure your settings for third party billing integrations such as Paypal, Google Checkout, etc."
   calculator: Calculator
   calculator_settings_warning: "If you are changing the calculator type, you must save first before you can edit the calculator settings"
   cancel: annuleer
@@ -214,6 +219,7 @@ nl-BE:
   charged: Aangere
   checkout: Bestelling
   city: Stad
+  clone: Clone
   code: Code
   combine: Combine
   comp_order: "Afgebroken order"
@@ -253,6 +259,7 @@ nl-BE:
   destroy: Verwijder
   display: Weergeven
   edit: Wijzig
+  editing_billing_integration: Editing Billing Integration
   editing_category: "Wijzig Categorie"
   editing_coupon: Editing Coupon
   editing_option_type: "Optie Type Wijzigen"
@@ -272,6 +279,8 @@ nl-BE:
   email_address: "E-mail Adres"
   email_server_settings_description: "E-mail server installen."
   empty_cart: "Winkelmandje leegmaken"
+  enable_login_via_login_password: "Use standard email/password"  
+  enable_login_via_openid: "Use OpenID instead"
   enable_mail_delivery: "Mail aflevering aanzetten"
   enable_mail_queue: "Enable Mail Queue"
   enter_exactly_as_shown_on_card: Please enter exactly as shown on the card
@@ -317,6 +326,7 @@ nl-BE:
   images: Afbeeldingen
   images_for: "Images for"
   in_progress: "Aan de gang"
+  integration_settings_warning: "If you are changing the billing integration, you must save first before you can edit the integration settings"
   invalid_search: "Foute zoekcriteria."
   inventory: Voorraad
   inventory_adjustment: "Voorraad Aanpassing"
@@ -344,6 +354,7 @@ nl-BE:
   login_failed: "Login authentication failed."      
   login_name: Login
   logout: Afmelden
+  look_for_similar_items: Look for similar items
   maestro_or_solo_cards: Maestro/Solo cards
   mail_delivery_enabled: "Mail aflevering aangezet"
   mail_delivery_not_enabled: "Mail aflevering afgezet"
@@ -357,11 +368,13 @@ nl-BE:
   meta_description: "Meta Description"
   meta_keywords: "Meta Keywords"
   metadata: "Metadata"
+  missing_required_information: "Missing Required Information"
   month: "Month"
   my_account: "Mijn Profiel"
   my_orders: "Mijn Bestellingen"    
   name: Naam
   new: Nieuw
+  new_billing_integration: New Billing Integration
   new_category: "Nieuwe categorie"
   new_coupon: New Coupon
   new_credit_card_payment: "Nieuwe Kredietkaart betaling"
@@ -370,6 +383,7 @@ nl-BE:
   new_option_type: "Nieuwe Optie Type"
   new_option_value: "Nieuwe Optie Waarde"
   new_product: "Nieuw Product"
+  new_product_group: New Product Group
   new_property: "Nieuwe Eigenschap"
   new_prototype: "Niewe Prototype"
   new_shipment: "Nieuwe Verzending"
@@ -385,7 +399,6 @@ nl-BE:
   new_variant: "Nieuwe Variant"
   new_zone: "Nieuwe Zone"
   next: Volgende
-  no: "No"
   no_items_in_cart: "Geen producten in Winkelmandje"
   no_match_found: "Geen gelijke gevonden"
   no_user_found: "No user was found with that email address"
@@ -436,6 +449,7 @@ nl-BE:
   please_create_user: "Please create a user account"     
   powered_by: "Powered by"
   presentation: Presentatie
+  preview: Preview
   previous: vorige
   price: Prijs
   price_with_vat_included: "{{price}} (inc. VAT)"
@@ -446,8 +460,121 @@ nl-BE:
   process: Verwerking
   product: Product
   product_details: "Product Details"
+  product_group: Product Group
+  product_group_invalid: Product Group has invalid scopes
+  product_groups: Product Groups
   product_has_no_description: Product has not description
   product_properties: "Product Eigenschappen"
+  product_scopes:
+    groups:
+      price:
+        description: "Scopes for selecting products based on Price"
+        name: Price
+      search:
+        description: "Scopes for selecting products based on name, keywords and description of product"
+        name: "Text search"
+      taxon:
+        description: "Scopes for selecting products based on Taxons"
+        name: Taxon
+      values:
+        description: "Scopes for selecting products based on option and property values"
+        name: Values
+    scopes:
+      ascend_by_master_price:
+        name: Ascend by product master price
+      ascend_by_name:
+        name: Ascend by product name
+      ascend_by_updated_at:
+        name: Ascendy by actualization date
+      by_popularity:
+        name: Sort by popularity(most popular first)
+      descend_by_master_price:
+        name: Descend by product master price
+      descend_by_name:
+        name: Descend by product name
+      descend_by_updated_at:
+        name: Descend by actualization date
+      in_name:
+        args:
+          words: Words
+        description: "(separated by space or comma)"
+        name: "Product name have following"
+        sentence: product name contain <em>%s</em>
+      in_name_or_description:
+        args:
+          words: Words
+        description: "(separated by space or comma)"
+        name: "Product name or description have following"
+        sentence: name or description contain <em>%s</em>
+      in_name_or_keywords:
+        args:
+          words: Words
+        description: "(separated by space or comma)"
+        name: "Product name or meta heywords have following"
+        sentence: name or keywords contain <em>%s</em>
+      in_taxons:
+        args:
+          "taxon_names": "Taxon names"
+        description: "Taxon names have to be separated by comma or space(eg. adidas,shoes)"
+        name: "In taxons and all their descendants"
+        sentence: in <em>%s</em> and all their descendants
+      master_price_gte:
+        args:
+          amount: Amount
+        description: ""
+        name: "Master price greater or equal to"
+        sentence: price greater or equal to <em>%.2f</em>
+      master_price_lte:
+        args:
+          amount: Amount
+        description: ""
+        name: "Master price lesser or equal to"
+        sentence: price less or equal to <em>%.2f</em>
+      price_between:
+        args:
+          high: High
+          low: Low
+        description: ""
+        name: "Price between"
+        sentence: price between <em>%.2f</em> and <em>%.2f</em>
+      taxons_name_eq:
+        args:
+          taxon_name: "Taxon name"
+        description: "In specific taxon - without descendants"
+        name: "In Taxon(without descendants)"
+        sentence: in <em>%s</em>
+      with:
+        args:
+          value: Value
+        description: "Selects all products that have at least one variant that have specified value as either option or property (eg. red)"
+        name: With value
+        sentence: with value <em>%s</em>
+      with_option:
+        args:
+          option: Option
+        description: "Selects all products that have specified option(eg. color)"
+        name: "With option"
+        sentence: with option <em>%s</em>
+      with_option_value:
+        args:
+          option: Option
+          value: Value
+        description: "Selects all products that have at least one variant with specified option and value(eg. color:red)"
+        name: "With option and value"
+        sentence: with option <em>%s</em> and value <em>%s</em>
+      with_property:
+        args:
+          property: Property
+        description: "Selects all products that have specified property(eg. weight)"
+        name: "With property"
+        sentence: with property <em>%s</em>
+      with_property_value:
+        args:
+          property: Property
+          value: Value
+        description: "Selects all products that have at least one variant with specified property and value(eg. weight:10kg)"
+        name: "With property value"
+        sentence: with property <em>%s</em> and value <em>%s</em>
   products: Producten
   products_with_zero_inventory_display: "Products with a zero inventory will {{not}} be displayed"
   properties: Eigenschappen
@@ -465,6 +592,11 @@ nl-BE:
   required_for_solo_and_maestro: Required for Solo and Maestro cards.
   resend: "Opnieuw verzenden"
   reset_password: "Reset my password"
+  resource_controller:
+    member_object_not_found: "Member object not found."
+    successfully_created: "Successfully created!"
+    successfully_removed: "Successfully removed!"
+    successfully_updated: "Successfully updated!"
   response_code: "Antwoord Code"  
   resume: "Hervatten"
   resumed: Hervat
@@ -478,6 +610,7 @@ nl-BE:
   sales_totals_description: "Omzet voor alle bestellingen"
   save_preferences: "Instellingen Opslaan"           
   search: Zoek
+  search_results: "Search results for '{{keywords}}'"
   secure_connection_type: "Secure Connection Type"
   select: Selecteer
   select_from_prototype: "Selecteer vanuit Prototype"
@@ -509,6 +642,7 @@ nl-BE:
   shipping_total: "Verzending"
   shop_by_taxonomy: "Shop by {{taxonomy}}"
   shopping_cart: "Winkelmandje"
+  show: Show
   show_deleted: "Toon verwijderde bestellingen"
   show_incomplete_orders: "Toon niet afgewerkte bestellingen"
   show_only_complete_orders: "Toon enkel afgewerkte bestellingen"
@@ -592,6 +726,7 @@ nl-BE:
   use_different_shipping_address: "Ander afleveringsadres gebruiken"
   user: Gebruiker
   user_account: "Account Gebruiker"
+  user_created_successfully: "User created successfully"
   user_details: "Details Gebruiker"
   users: Gebruikers
   value: Waarde
@@ -606,7 +741,6 @@ nl-BE:
   whats_this: "Wat is dit"
   width: Breedte
   year: "Year"
-  yes: "Yes"
   you_have_been_logged_out: "You have been logged out."
   your_cart_is_empty: "Uw winkelmandje is leeg"
   zip: Postcode

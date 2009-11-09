@@ -7,6 +7,10 @@ module Admin::BaseHelper
     link_to_with_icon('edit', t("edit"), edit_object_url(resource))
   end
   
+  def link_to_clone(resource)
+    link_to_with_icon('exclamation', t("clone"), clone_admin_product_url(resource))
+  end
+  
   def link_to_delete(resource, options = {})
 	  options.assert_valid_keys(:url, :caption, :title)
 
@@ -35,8 +39,8 @@ module Admin::BaseHelper
     image_tag("/images/admin/icons/#{icon_name}.png")
   end
   
-  def button(text, icon = nil, button_type = 'submit')
-    content_tag('button', content_tag('span', text), :type => button_type)
+  def button(text, icon = nil, button_type = 'submit', options={})
+    content_tag('button', content_tag('span', text), options.merge(:type => button_type))
   end
 
   def button_link_to(text, url, html_options = {})

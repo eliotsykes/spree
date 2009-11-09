@@ -1,5 +1,7 @@
 --- 
 de: 
+  'no': "No"
+  'yes': "Yes"
   a_copy_of_all_mail_will_be_sent_to_the_following_addresses: A copy of all mail be sent to the following addresses
   abbreviation: Abkürzung
   access_denied: "Zugriff verweigert"        
@@ -197,6 +199,9 @@ de:
   backordering_is_allowed: "Backordering {{not}} allowed"
   bill_address: Rechnungsadresse
   billing_address: Rechnungsadresse
+  billing_integration: Billing Integration
+  billing_integrations: Billing Integrations
+  billing_integrations_description: "Configure your settings for third party billing integrations such as Paypal, Google Checkout, etc."
   calculator: Calculator
   calculator_settings_warning: "If you are changing the calculator type, you must save first before you can edit the calculator settings"
   cancel: Verwerfen
@@ -214,6 +219,7 @@ de:
   charged: geändert
   checkout: "Zur Kasse"
   city: Stadt
+  clone: Clone
   code: Code
   combine: Combine
   comp_order: "Bestellung abbrechen"
@@ -253,6 +259,7 @@ de:
   destroy: Entfernen
   display: Anzeigen
   edit: Bearbeiten
+  editing_billing_integration: Editing Billing Integration
   editing_category: "Kategorie bearbeiten"
   editing_coupon: Editing Coupon
   editing_option_type: "Optionstyp bearbeiten"
@@ -272,6 +279,8 @@ de:
   email_address: "E-Mail Adresse"
   email_server_settings_description: "Mailserver-Einstellungen ändern"
   empty_cart: "Warenkorb leeren"
+  enable_login_via_login_password: "Use standard email/password"  
+  enable_login_via_openid: "Use OpenID instead"
   enable_mail_delivery: Enable Mail Delivery      
   enable_mail_queue: "Enable Mail Queue"
   enter_exactly_as_shown_on_card: Please enter exactly as shown on the card
@@ -317,6 +326,7 @@ de:
   images: Bilder
   images_for: "Images for"
   in_progress: "In Bearbeitung"
+  integration_settings_warning: "If you are changing the billing integration, you must save first before you can edit the integration settings"
   invalid_search: "Ungültige Suche"
   inventory: Lager
   inventory_adjustment: "Lager Anpassung"
@@ -344,6 +354,7 @@ de:
   login_failed: "Login authentication failed."      
   login_name: Benutzer
   logout: Abmelden
+  look_for_similar_items: Look for similar items
   maestro_or_solo_cards: Maestro/Solo cards
   mail_delivery_enabled: "Mailversand aktiviert"
   mail_delivery_not_enabled: "Mailversand deaktiviert"
@@ -357,11 +368,13 @@ de:
   meta_description: "Meta Description"
   meta_keywords: "Meta Keywords"
   metadata: "Metadata"
+  missing_required_information: "Missing Required Information"
   month: "Month"
   my_account: "Mein Konto"
   my_orders: "Meine Bestellungen"
   name: Name
   new: Neu
+  new_billing_integration: New Billing Integration
   new_category: "Neue Kategorie"
   new_coupon: New Coupon
   new_credit_card_payment: "Neue Kreditkartenzahlung"
@@ -370,6 +383,7 @@ de:
   new_option_type: "Neue Option"
   new_option_value: "Neuer Optionswert"
   new_product: "Neues Produkt"
+  new_product_group: New Product Group
   new_property: "Neue Eigenschaft"
   new_prototype: "Neuer Prototyp"
   new_shipment: "Neue Lieferung"
@@ -385,7 +399,6 @@ de:
   new_variant: "Neue Variante"
   new_zone: "Neue Zone"
   next: weiter
-  no: "No"
   no_items_in_cart: "Keine Artikel im  Warenkorb"
   no_match_found: "Kein Treffer"
   no_user_found: "No user was found with that email address"
@@ -436,6 +449,7 @@ de:
   please_create_user: "Please create a user account"     
   powered_by: "Powered by"
   presentation: Anzeige
+  preview: Preview
   previous: zurück
   price: Preis
   price_with_vat_included: "{{price}} (inc. VAT)"
@@ -446,8 +460,121 @@ de:
   process: Abschicken
   product: Produkt
   product_details: "Produkt Details"
+  product_group: Product Group
+  product_group_invalid: Product Group has invalid scopes
+  product_groups: Product Groups
   product_has_no_description: Product has not description
   product_properties: "Produkt-Eigenschaften"
+  product_scopes:
+    groups:
+      price:
+        description: "Scopes for selecting products based on Price"
+        name: Price
+      search:
+        description: "Scopes for selecting products based on name, keywords and description of product"
+        name: "Text search"
+      taxon:
+        description: "Scopes for selecting products based on Taxons"
+        name: Taxon
+      values:
+        description: "Scopes for selecting products based on option and property values"
+        name: Values
+    scopes:
+      ascend_by_master_price:
+        name: Ascend by product master price
+      ascend_by_name:
+        name: Ascend by product name
+      ascend_by_updated_at:
+        name: Ascendy by actualization date
+      by_popularity:
+        name: Sort by popularity(most popular first)
+      descend_by_master_price:
+        name: Descend by product master price
+      descend_by_name:
+        name: Descend by product name
+      descend_by_updated_at:
+        name: Descend by actualization date
+      in_name:
+        args:
+          words: Words
+        description: "(separated by space or comma)"
+        name: "Product name have following"
+        sentence: product name contain <em>%s</em>
+      in_name_or_description:
+        args:
+          words: Words
+        description: "(separated by space or comma)"
+        name: "Product name or description have following"
+        sentence: name or description contain <em>%s</em>
+      in_name_or_keywords:
+        args:
+          words: Words
+        description: "(separated by space or comma)"
+        name: "Product name or meta heywords have following"
+        sentence: name or keywords contain <em>%s</em>
+      in_taxons:
+        args:
+          "taxon_names": "Taxon names"
+        description: "Taxon names have to be separated by comma or space(eg. adidas,shoes)"
+        name: "In taxons and all their descendants"
+        sentence: in <em>%s</em> and all their descendants
+      master_price_gte:
+        args:
+          amount: Amount
+        description: ""
+        name: "Master price greater or equal to"
+        sentence: price greater or equal to <em>%.2f</em>
+      master_price_lte:
+        args:
+          amount: Amount
+        description: ""
+        name: "Master price lesser or equal to"
+        sentence: price less or equal to <em>%.2f</em>
+      price_between:
+        args:
+          high: High
+          low: Low
+        description: ""
+        name: "Price between"
+        sentence: price between <em>%.2f</em> and <em>%.2f</em>
+      taxons_name_eq:
+        args:
+          taxon_name: "Taxon name"
+        description: "In specific taxon - without descendants"
+        name: "In Taxon(without descendants)"
+        sentence: in <em>%s</em>
+      with:
+        args:
+          value: Value
+        description: "Selects all products that have at least one variant that have specified value as either option or property (eg. red)"
+        name: With value
+        sentence: with value <em>%s</em>
+      with_option:
+        args:
+          option: Option
+        description: "Selects all products that have specified option(eg. color)"
+        name: "With option"
+        sentence: with option <em>%s</em>
+      with_option_value:
+        args:
+          option: Option
+          value: Value
+        description: "Selects all products that have at least one variant with specified option and value(eg. color:red)"
+        name: "With option and value"
+        sentence: with option <em>%s</em> and value <em>%s</em>
+      with_property:
+        args:
+          property: Property
+        description: "Selects all products that have specified property(eg. weight)"
+        name: "With property"
+        sentence: with property <em>%s</em>
+      with_property_value:
+        args:
+          property: Property
+          value: Value
+        description: "Selects all products that have at least one variant with specified property and value(eg. weight:10kg)"
+        name: "With property value"
+        sentence: with property <em>%s</em> and value <em>%s</em>
   products: Produkte
   products_with_zero_inventory_display: "Products with a zero inventory will {{not}} be displayed"
   properties: "Eigenschaften"
@@ -465,6 +592,11 @@ de:
   required_for_solo_and_maestro: Required for Solo and Maestro cards.
   resend: "Neu versenden"
   reset_password: "Reset my password"
+  resource_controller:
+    member_object_not_found: "Member object not found."
+    successfully_created: "Successfully created!"
+    successfully_removed: "Successfully removed!"
+    successfully_updated: "Successfully updated!"
   response_code: Rückgabewert
   resume: Fortsetzen
   resumed: Fortgesetzt
@@ -478,6 +610,7 @@ de:
   sales_totals_description: ""
   save_preferences: Save Preferences           
   search: Suchen
+  search_results: "Search results for '{{keywords}}'"
   secure_connection_type: Secure Connection Type
   select: Auswählen
   select_from_prototype: ""
@@ -509,6 +642,7 @@ de:
   shipping_total: "Lieferkosten Gesamt"
   shop_by_taxonomy: "Shop by {{taxonomy}}"
   shopping_cart: Warenkorb
+  show: Show
   show_deleted: "Zeige gelöschte"
   show_incomplete_orders: "Zeige unvollständige Bestellungen"
   show_only_complete_orders: "Only show complete orders"
@@ -592,6 +726,7 @@ de:
   use_different_shipping_address: "Andere Lieferaddresse verwenden"
   user: Benutzer
   user_account: User Account
+  user_created_successfully: "User created successfully"
   user_details: "Benutzer Details"
   users: Benutzer
   value: ""
@@ -606,7 +741,6 @@ de:
   whats_this: "What's this"
   width: Breite
   year: "Year"
-  yes: "Yes"
   you_have_been_logged_out: "You have been logged out."
   your_cart_is_empty: "Ihr Warenkorb ist leer"
   zip: PLZ

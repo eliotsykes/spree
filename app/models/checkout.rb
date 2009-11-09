@@ -13,8 +13,13 @@ class Checkout < ActiveRecord::Base
   # for memory-only storage of creditcard details
   attr_accessor :creditcard    
   attr_accessor :coupon_code
+	attr_accessor :confirmed
 
   validates_presence_of :order_id
+
+  def completed_at
+    order.completed_at
+  end
 
   private
   def authorize_creditcard
@@ -23,6 +28,7 @@ class Checkout < ActiveRecord::Base
     return false unless cc.valid? 
     return false unless cc.authorize(order.total)
     return false unless order.complete
+    true
   end
 
   def capture_creditcard
@@ -35,7 +41,7 @@ class Checkout < ActiveRecord::Base
   end
 
   def process_creditcard?
-    order and creditcard and not creditcard[:number].blank?
+    order and creditcard and confirmed and not creditcard[:number].blank?
   end
 
   def process_coupon_code

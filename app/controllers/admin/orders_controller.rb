@@ -30,15 +30,15 @@ class Admin::OrdersController < Admin::BaseController
   private
 
   def collection
-    @search = Order.search(params[:search])
+    @search = Order.searchlogic(params[:search])
     @search.order ||= "descend_by_created_at"
 
     # QUERY - get per_page from form ever???  maybe push into model
     # @search.per_page ||= Spree::Config[:orders_per_page]
 
     # turn on show-complete filter by default
-    unless params[:search] && params[:search][:checkout_completed_at_not_null]
-      @search.checkout_completed_at_not_null = true 
+    unless params[:search] && params[:search][:completed_at_not_null]
+      @search.completed_at_not_null = true 
     end
     
     @collection = @search.paginate(:include  => [:user, :shipments, {:creditcard_payments => {:creditcard => :address}}],

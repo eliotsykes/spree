@@ -24,10 +24,10 @@ log/*.log
 pkg
 public/assets
 public/attachments
+public/blank_iframe.html
 public/images/calendar_date_select
 public/images/flags
 public/images/products/*
-public/images/openid-inputicon.gif
 public/images/pp_checkout.gif
 public/javascripts/calendar_date_select
 public/plugin_assets

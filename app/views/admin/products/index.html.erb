@@ -32,12 +32,14 @@
     <td class="actions">
       <%= link_to_edit product if product.deleted_at.nil?  %>
       &nbsp;
+      <%= link_to_clone product %>
+      &nbsp;
       <%= link_to_delete product if product.deleted_at.nil?  %>
     </td>
   </tr>
 <% end %>
 </table>
-<%= will_paginate (:prev => "&#171; #{t('previous')}", :next => "#{t('next')} &#187;") %>						
+<%= will_paginate(:prev => "&#171; #{t('previous')}", :next => "#{t('next')} &#187;") %>
 
 <% content_for :sidebar do %>
 
